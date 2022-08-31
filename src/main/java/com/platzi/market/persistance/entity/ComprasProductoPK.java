@@ -1,14 +1,12 @@
 package com.platzi.market.persistance.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
-@Getter
-@Setter
+@Data
 @Embeddable
 public class ComprasProductoPK implements Serializable {
 

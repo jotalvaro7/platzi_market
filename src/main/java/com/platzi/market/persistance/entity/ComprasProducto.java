@@ -1,13 +1,11 @@
 package com.platzi.market.persistance.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "compras_productos")
 public class ComprasProducto {

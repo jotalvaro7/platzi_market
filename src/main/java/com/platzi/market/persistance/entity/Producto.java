@@ -1,12 +1,10 @@
 package com.platzi.market.persistance.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "productos")
 public class Producto {
