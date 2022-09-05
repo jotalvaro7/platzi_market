@@ -1,0 +1,39 @@
+version: "3.9"
+services:
+  postgres14:
+    container_name: postgres14
+    image: postgres:14-alpine
+    ports:
+      - "5532:5432"
+    environment:
+      POSTGRES_PASSWORD: sasa
+      POSTGRES_DB: platzi-market
+    volumes:
+      - data-postgres:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - spring
+
+  platzi-market:
+    container_name: platzi-market
+    image: juliocesarosorio709/platzi-market
+#    build:
+#      context: ./
+#      dockerfile: ./Dockerfile
+    ports:
+      - "8090:8090"
+    env_file:
+      - ./.env
+    depends_on:
+      - postgres14
+    restart: always
+    networks:
+      - spring
+
+volumes:
+  data-postgres:
+    name: data-postgres
+
+networks:
+  spring:
+    name: spring
