@@ -7,6 +7,7 @@ import com.platzi.market.persistance.entity.Compra;
 import com.platzi.market.persistance.mapper.PurchaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,17 +22,20 @@ public class CompraRepository implements PurchaseRepository {
     private PurchaseMapper mapper;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Purchase> getAll() {
         return mapper.toPurchases((List<Compra>) compraCrudRepository.findAll());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<List<Purchase>> getByClient(String clientId) {
         return compraCrudRepository.findByIdCliente(clientId)
                 .map(compras -> mapper.toPurchases(compras));
     }
 
     @Override
+    @Transactional
     public Purchase save(Purchase purchase) {
         Compra compra = mapper.toCompra(purchase);
         compra.getProductos().forEach(producto -> producto.setCompra(compra));
